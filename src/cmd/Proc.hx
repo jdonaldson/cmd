@@ -9,11 +9,15 @@ class Proc{
     var process : Process;
     var _stdout : Bytes;
     var _stderr : Bytes;
-    public function new(p : Process){
-        this.process = p; 
+
+    public function new(p : Process) this.process = p
+
+    public function pipe(?close=true) {
+        if (close) process.close();
+        return new Cmd(this);
     }
-    public function pipe() return new Cmd(this)
-        public function stdin(bytes : Bytes){
+
+    public function stdin(bytes : Bytes){
         process.stdin.write(bytes);
         process.stdin.flush();
         return this;
@@ -33,7 +37,7 @@ class Proc{
         }
         return this;
     }
-    public function exit(? func : Int->Void){
+    public function exit(?func : Int->Void){
         if (func != null) func(process.exitCode());
         return this;
     }

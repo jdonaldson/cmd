@@ -1,8 +1,11 @@
 import cmd.Cmd;
+import cmd.MacroCmd;
 class Main {
     static function main() {
-        var c = new Cmd();
-        c.ls(['-l']).pipe().grep(["build.hxml"]).stdout(function(x) trace(x));
+        var c2 = new Cmd();
+        c2.echo(['foo']).stdout(function(x) trace(x));
+        //var g = new Cmd();
+        //g.echo(["hi"]).stdout(function(x) trace(x));
     }
 }
 
